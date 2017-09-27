@@ -5,6 +5,7 @@
  * Date: 19.05.2017
  * Time: 14:53.
  */
+
 namespace Formatz\Bundle\PhoneNumberBundle\Form\DataTransformer;
 
 use libphonenumber\NumberParseException;
@@ -80,7 +81,8 @@ class PhoneNumberToStringTransformer implements DataTransformerInterface
             try {
                 $phoneNumber = $phoneUtil->parse($phoneNumber, $this->defaultRegion);
             } catch (NumberParseException $e) {
-                throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
+                //treat like is empty
+                return '';
             }
         } else {
             throw new TransformationFailedException('Expected a string to parse phone number.');
