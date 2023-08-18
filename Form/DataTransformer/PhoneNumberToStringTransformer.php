@@ -77,15 +77,11 @@ class PhoneNumberToStringTransformer implements DataTransformerInterface
 
         $phoneUtil = PhoneNumberUtil::getInstance();
 
-        if (is_string($phoneNumber)) {
-            try {
-                $phoneNumber = $phoneUtil->parse($phoneNumber, $this->defaultRegion);
-            } catch (NumberParseException $e) {
-                //treat like is empty
-                return '';
-            }
-        } else {
-            throw new TransformationFailedException('Expected a string to parse phone number.');
+        try {
+            $phoneNumber = $phoneUtil->parse((string)$phoneNumber, $this->defaultRegion);
+        } catch (NumberParseException $e) {
+            //treat like is empty
+            return '';
         }
 
         return $phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL);
