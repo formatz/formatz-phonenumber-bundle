@@ -69,7 +69,7 @@ class PhoneNumberToStringTransformer implements DataTransformerInterface
      *
      * @throws TransformationFailedException When the transformation fails
      */
-    public function transform($phoneNumber)
+    public function transform(mixed $phoneNumber): mixed
     {
         if (null === $phoneNumber) {
             return '';
@@ -111,7 +111,7 @@ class PhoneNumberToStringTransformer implements DataTransformerInterface
      *
      * @throws TransformationFailedException When the transformation fails
      */
-    public function reverseTransform($string)
+    public function reverseTransform(mixed $string): mixed
     {
         if (empty($string)) {
             return null;
